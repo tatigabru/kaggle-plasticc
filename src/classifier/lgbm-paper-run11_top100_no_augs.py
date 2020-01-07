@@ -331,6 +331,7 @@ def look_importance(model, x_valid, y_valid):
         result[feature_names[feat_index]] = feat_scores
     return pd.DataFrame(result)
 
+
 def do_train(full_train, train_columns, only_one_fold=False, show_confusion_matrix=False, save_importances=False):
     clfs = []
     oof_preds = np.zeros((len(full_train), n_classes))
@@ -467,15 +468,6 @@ def dump_to_file(str):
     with open("log.txt", "a") as text_file:
         text_file.write(str + '\n' + '--------------------------------------------------------\n')
 
-"""
-bo = BayesianOptimization(estimate_model, {'learning_rate': (0.01, 0.03),
-                                     'n_estimators': (600, 1500),
-                                     'max_depth': (3, 8)
-                                     })
-bo.maximize(init_points=10, n_iter=10)
-print(bo.res['max'])
-exit(0)
-"""
 
 only_one_fold = False
 reset_state()

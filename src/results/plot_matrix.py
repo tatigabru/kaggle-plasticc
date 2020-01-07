@@ -5,7 +5,7 @@ from sklearn.model_selection import StratifiedKFold
 import gc
 import os
 import matplotlib.pyplot as plt
-
+import matplotlib.pylab as pylab
 from collections import Counter
 from functools import reduce
 from sklearn.metrics import confusion_matrix
@@ -16,7 +16,6 @@ import time
 
 columns_14_short = ['6', '15', '16', '42', '52', '53', '62', '64', '65', '67', '88', '90', '92', '95']
 
-# http://scikit-learn.org/stable/modules/generated/sklearn.metrics.confusion_matrix.html
 def plot_confusion_matrix(cm, classes,
                           normalize=False,
                           title='Confusion matrix',
@@ -24,6 +23,8 @@ def plot_confusion_matrix(cm, classes,
     """
     This function prints and plots the confusion matrix.
     Normalization can be applied by setting `normalize=True`.
+    From:
+    http://scikit-learn.org/stable/modules/generated/sklearn.metrics.confusion_matrix.html
     """
     if normalize:
         cm = cm.astype('float') / cm.sum(axis=1)[:, np.newaxis]
@@ -83,7 +84,6 @@ cnf_matrix = np.array([[ 1394,     0,    10,     0,     0,     0,     0,     2, 
        [    0,    28,     0,    61,     5,     0,    25,     0,     0,
             8,    20,    13,     0,  1221]], dtype=int)
 
-import matplotlib.pylab as pylab
 
 params = {'legend.fontsize': 'x-large',
           'axes.labelsize': 'x-large',
@@ -94,7 +94,7 @@ pylab.rcParams.update(params)
 
 np.set_printoptions(precision=2)
 # Plot non-normalized confusion matrix
-fig_szie = 10
-fig = plt.figure(figsize=(fig_szie, fig_szie))
+fig_size = 10
+fig = plt.figure(figsize=(fig_size, fig_size))
 plot_confusion_matrix(cnf_matrix, classes=columns_14_short, normalize=True)
 fig.savefig('confusion_matrix.png', pad_inches=0.1, bbox_inches='tight', dpi=600)
