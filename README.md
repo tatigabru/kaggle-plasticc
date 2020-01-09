@@ -20,19 +20,21 @@ range of transients and periodic objects, see [data]() . The [dataset](https://w
 
 The training dataset had 7848 light curves from 15 classes, and was highly unbalanced.
 
-![eda](pics/eda.png)
-Fig. 1 Examples of ”Normal”, ”No Lung Opacity / Not Normal”, ”Lung Opacity” chest X-Ray (CXR) images.
+![eda](pics/Paper1_ddf1_v2.png)
+Fig. 1. Examples of simulated light curves for each class in the passbands ugrizy.
+MDJ – Modified Julian Date in days
 
 ## Metrics
-The evaluation metric was provided in the challenge. The models were evaluated with weighted multi-class logarithmic loss. [See evaluation here](https://www.kaggle.com/c/PLAsTiCC-2018/overview/evaluation). The implemented metric calculation is in src/classifier/....py
+The evaluation metric was provided in the challenge. The models were evaluated with weighted multi-class logarithmic loss. [See evaluation here](https://www.kaggle.com/c/PLAsTiCC-2018/overview/evaluation). 
 
 ## Models
-In this paper, we use python boosted decision trees implementation, [LightGBM](12),
+In this paper, we use python boosted decision trees implementation, [LightGBM](https://lightgbm.readthedocs.io/en/latest/),
 with 5 folds cross-validation, stratified by classes.
+
 We used different sets of features for the input of LightGBM classifier and selected the optimal features set based on the average 5-folds cross-validation scheme. The hyperparameters used are listed in the paper.
 
 ## Features
-We calculated a number of various features from thelight curves. The features exptractors used for the paper can be found in src/feature_extractors . The exptracted features calculated for the train and test sets are available on kaggle for download: [features]().
+We calculated a number of various features from the light curves. The features exptractors used for the paper can be found in src/feature_extractors . The exptracted features calculated for the train and test sets are available on kaggle dataset for download: [features]().
 
 ## How to install and run
 
