@@ -11,18 +11,19 @@ from src.config import SAVE_DIR
 from src.feature_extractors.car_extractor import calculate_car
 
 
-sys.path.append('/home/user/plasticc/kaggle-plasticc/src')
+sys.path.append("/home/user/plasticc/kaggle-plasticc/src")
+
 
 def extract_car_from_group(group):
-    g = group.sort_values('mjd')
-    t = g['mjd'].values
-    f = g['flux'].values
-    e = g['flux_err'].values
+    g = group.sort_values("mjd")
+    t = g["mjd"].values
+    f = g["flux"].values
+    e = g["flux_err"].values
     sigma, tau = calculate_car(t, f, e)
-    return pd.Series({'CAR_sigma': sigma, 'CAR_tau': tau})
+    return pd.Series({"CAR_sigma": sigma, "CAR_tau": tau})
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
 
     """
     training set
@@ -60,14 +61,16 @@ if __name__ == '__main__':
     """
     augmented set combined
     """
-    train = pd.read_csv('data/gp_augmented/gp_augmented_ddf_to_nonddf_class_52.csv')
-    flux_mean = train.groupby(['augmentation_id', 'passband'])['flux'].transform('mean')
-    flux_std = train.groupby(['augmentation_id', 'passband'])['flux'].transform('std')
-    train['flux'] = (train['flux'] - flux_mean) / flux_std
-    train['flux_err'] = train['flux_err'] / flux_std
+    train = pd.read_csv("data/gp_augmented/gp_augmented_ddf_to_nonddf_class_52.csv")
+    flux_mean = train.groupby(["augmentation_id", "passband"])["flux"].transform("mean")
+    flux_std = train.groupby(["augmentation_id", "passband"])["flux"].transform("std")
+    train["flux"] = (train["flux"] - flux_mean) / flux_std
+    train["flux_err"] = train["flux_err"] / flux_std
 
-    res = train.groupby(['augmentation_id']).apply(extract_car_from_group)
+    res = train.groupby(["augmentation_id"]).apply(extract_car_from_group)
 
     # flat = res.unstack('passband')
     # flat.columns = [f'{i}|{j}' if j != '' else f'{i}' for i, j in flat.columns]
-    res.to_csv(os.path.join(SAVE_DIR, 'train_car_features_combined.csv'), float_format='%.6g')
+    res.to_csv(
+        os.path.join(SAVE_DIR, "train_car_features_combined.csv"), float_format="%.6g"
+    )

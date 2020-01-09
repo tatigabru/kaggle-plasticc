@@ -14,10 +14,27 @@ from lightgbm import LGBMClassifier
 import time
 
 
-columns_14_short = ["6", "15", "16", "42", "52", "53", "62", "64", "65", "67", "88", "90", "92", "95"]
+columns_14_short = [
+    "6",
+    "15",
+    "16",
+    "42",
+    "52",
+    "53",
+    "62",
+    "64",
+    "65",
+    "67",
+    "88",
+    "90",
+    "92",
+    "95",
+]
 
 
-def plot_confusion_matrix(cm, classes, normalize=False, title="Confusion matrix", cmap=plt.cm.Blues):
+def plot_confusion_matrix(
+    cm, classes, normalize=False, title="Confusion matrix", cmap=plt.cm.Blues
+):
     """
     This function prints and plots the confusion matrix.
     Normalization can be applied by setting `normalize=True`.

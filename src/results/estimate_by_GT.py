@@ -68,7 +68,22 @@ def multi_weighted_logloss_chai(y_true, y_preds, classes, class_weights):
 
 def multi_weighted_logloss_without_99(y_true, y_preds):
     classes = [6, 15, 16, 42, 52, 53, 62, 64, 65, 67, 88, 90, 92, 95]
-    class_weights = {6: 1, 15: 2, 16: 1, 42: 1, 52: 1, 53: 1, 62: 1, 64: 2, 65: 1, 67: 1, 88: 1, 90: 1, 92: 1, 95: 1}
+    class_weights = {
+        6: 1,
+        15: 2,
+        16: 1,
+        42: 1,
+        52: 1,
+        53: 1,
+        62: 1,
+        64: 2,
+        65: 1,
+        67: 1,
+        88: 1,
+        90: 1,
+        92: 1,
+        95: 1,
+    }
 
     loss = multi_weighted_logloss_chai(y_true, y_preds, classes, class_weights)
     return loss
@@ -119,7 +134,12 @@ print("Done", test_len)
 # normalize all columns
 test_df[columns_15] = test_df[columns_15].div(test_df[columns_15].sum(axis=1), axis=0)
 
-print("loss with 99:", multi_weighted_logloss_with_99(test_df["true_target"].values, test_df[columns_15].values))
+print(
+    "loss with 99:",
+    multi_weighted_logloss_with_99(
+        test_df["true_target"].values, test_df[columns_15].values
+    ),
+)
 
 y = test_df["true_target"]
 unique_y = np.unique(y)
@@ -136,7 +156,12 @@ print("Without 99 len", len(test_df))
 # normalize all columns
 test_df[columns_14] = test_df[columns_14].div(test_df[columns_14].sum(axis=1), axis=0)
 
-print("loss without 99:", multi_weighted_logloss_without_99(test_df["true_target"].values, test_df[columns_14].values))
+print(
+    "loss without 99:",
+    multi_weighted_logloss_without_99(
+        test_df["true_target"].values, test_df[columns_14].values
+    ),
+)
 
 # Compute confusion matrix
 
@@ -152,11 +177,44 @@ y_map = np.array([class_map[val] for val in y])
 # print('Matrix calculated')
 # print(cnf_matrix.__repr__())
 
-columns_14_short = ["6", "15", "16", "42", "52", "53", "62", "64", "65", "67", "88", "90", "92", "95"]
-columns_15_short = ["6", "15", "16", "42", "52", "53", "62", "64", "65", "67", "88", "90", "92", "95", "99"]
+columns_14_short = [
+    "6",
+    "15",
+    "16",
+    "42",
+    "52",
+    "53",
+    "62",
+    "64",
+    "65",
+    "67",
+    "88",
+    "90",
+    "92",
+    "95",
+]
+columns_15_short = [
+    "6",
+    "15",
+    "16",
+    "42",
+    "52",
+    "53",
+    "62",
+    "64",
+    "65",
+    "67",
+    "88",
+    "90",
+    "92",
+    "95",
+    "99",
+]
 
 # http://scikit-learn.org/stable/modules/generated/sklearn.metrics.confusion_matrix.html
-def plot_confusion_matrix(cm, classes, normalize=False, title="Confusion matrix", cmap=plt.cm.Blues):
+def plot_confusion_matrix(
+    cm, classes, normalize=False, title="Confusion matrix", cmap=plt.cm.Blues
+):
     """
     This function prints and plots the confusion matrix.
     Normalization can be applied by setting `normalize=True`.

@@ -90,14 +90,24 @@ def calc_peak_width(df_lights, passband):
             peak_start = df_lights["mjd"].values[0]
         else:
             peak_start = find_root(
-                p["mjd"].values[start - 1], fv[start - 1] - thr, p["mjd"].values[start], fv[start] - thr
+                p["mjd"].values[start - 1],
+                fv[start - 1] - thr,
+                p["mjd"].values[start],
+                fv[start] - thr,
             )
         if end == fl:
             # peak_end = p['mjd'].values[end - 1]
             peak_end = df_lights["mjd"].values[-1]
         else:
-            peak_end = find_root(p["mjd"].values[end - 1], fv[end - 1] - thr, p["mjd"].values[end], fv[end] - thr)
-        peaks.append((peak_start, peak_end, p["mjd"].values[start], p["mjd"].values[end - 1]))
+            peak_end = find_root(
+                p["mjd"].values[end - 1],
+                fv[end - 1] - thr,
+                p["mjd"].values[end],
+                fv[end] - thr,
+            )
+        peaks.append(
+            (peak_start, peak_end, p["mjd"].values[start], p["mjd"].values[end - 1])
+        )
     # print(peaks)
     if len(peaks) != 1:
         return None
@@ -108,12 +118,29 @@ def add_peak(features, new_peak):
     if new_peak is None:
         return features
 
-    est_new_peak_start, est_new_peak_end, certain_new_peak_start, certain_new_peak_end = new_peak
+    (
+        est_new_peak_start,
+        est_new_peak_end,
+        certain_new_peak_start,
+        certain_new_peak_end,
+    ) = new_peak
     if features is None:
-        return (1, est_new_peak_start, est_new_peak_end, certain_new_peak_start, certain_new_peak_end)
+        return (
+            1,
+            est_new_peak_start,
+            est_new_peak_end,
+            certain_new_peak_start,
+            certain_new_peak_end,
+        )
 
     # update
-    n_peaks, est_peak_start, est_peak_end, certain_peak_start, certain_peak_end = features
+    (
+        n_peaks,
+        est_peak_start,
+        est_peak_end,
+        certain_peak_start,
+        certain_peak_end,
+    ) = features
     est_peak_start = max(est_peak_start, est_new_peak_start)
     est_peak_end = min(est_peak_end, est_new_peak_end)
     if est_peak_end <= est_peak_start:
@@ -150,7 +177,13 @@ def fuzzy_greater(x, a, b):
 def calc_class6_quality(features):
     if features is None:
         return 0.0, 0.0, -1, -1
-    n_peaks, est_peak_start, est_peak_end, certain_peak_start, certain_peak_end = features
+    (
+        n_peaks,
+        est_peak_start,
+        est_peak_end,
+        certain_peak_start,
+        certain_peak_end,
+    ) = features
     if n_peaks < 0:
         return 0.0, 0.0, -1, -1
     est_width = est_peak_end - est_peak_start
@@ -173,10 +206,18 @@ def calc_features_for_df(df_lights):
         object_data.sort_values(by=["mjd"])
         features = calc_features_one_object(object_data)
         quality, n_peaks, est_width, certain_width = calc_class6_quality(features)
-        features_for_all_objects.append([object_id, quality, n_peaks, est_width, certain_width])
+        features_for_all_objects.append(
+            [object_id, quality, n_peaks, est_width, certain_width]
+        )
     return pd.DataFrame(
         data=features_for_all_objects,
-        columns=["object_id", "my_6_quality", "my_6_n_peaks", "my_6_est_width", "my_6_certain_width"],
+        columns=[
+            "object_id",
+            "my_6_quality",
+            "my_6_n_peaks",
+            "my_6_est_width",
+            "my_6_certain_width",
+        ],
     )
 
 
@@ -188,7 +229,13 @@ def calc_and_save_features(params):
     input_df = pd.read_csv(input_file)
     calculated_features = calc_features_for_df(input_df)
     calculated_features.to_csv(output_file, index=False)
-    print("finish calculate:", input_file, output_file, (time.time() - start) / 60, "minutes")
+    print(
+        "finish calculate:",
+        input_file,
+        output_file,
+        (time.time() - start) / 60,
+        "minutes",
+    )
 
 
 if __name__ == "__main__":

@@ -47,7 +47,9 @@ def calc_features_for_passband(df_lights):
     y = np.log(y)
 
     s = np.log(
-        1 + df_lights["flux_err"].values / np.clip(df_lights["flux"].values - df_lights["flux_err"].values, 1e-7, None)
+        1
+        + df_lights["flux_err"].values
+        / np.clip(df_lights["flux"].values - df_lights["flux_err"].values, 1e-7, None)
     )
 
     max_ind = np.argmax(y)
@@ -128,7 +130,9 @@ def calc_features(df_lights):
         object_data = df_lights[df_lights[object_id_column] == object_id]
         params.append((object_data, object_id))
     # features_for_all_objects = pool.map(calc_features_for_all_passbands, params)
-    features_for_all_objects = [calc_features_for_all_passbands(param) for param in params]
+    features_for_all_objects = [
+        calc_features_for_all_passbands(param) for param in params
+    ]
     full_test = pd.DataFrame(data=features_for_all_objects, columns=columns_names)
 
     return full_test
@@ -142,8 +146,13 @@ def calc_and_save_features(params):
     input_df = pd.read_csv(input_file)
     calculated_features = calc_features(input_df)
     calculated_features.to_csv(output_file, index=False)
-    print("finish calculate:", input_file, output_file, (time.time() - start) / 60, "minutes")
-
+    print(
+        "finish calculate:",
+        input_file,
+        output_file,
+        (time.time() - start) / 60,
+        "minutes",
+    )
 
 
 def main():
@@ -176,4 +185,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-    

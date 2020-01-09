@@ -43,7 +43,12 @@ data[columns_14] = data[columns_14].div(data[columns_14].sum(axis=1), axis=0)
 def GenUnknown(data):
     return (
         ((((data["mymedian"]) + (((data["mymean"]) / 2.0))) / 2.0))
-        + (((((1.0) - (((data["mymax"]) * (((data["mymax"]) * (data["mymax"]))))))) / 2.0))
+        + (
+            (
+                (((1.0) - (((data["mymax"]) * (((data["mymax"]) * (data["mymax"])))))))
+                / 2.0
+            )
+        )
     ) / 2.0
 
 

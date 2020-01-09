@@ -64,7 +64,22 @@ columns_15 = [
     "class_95",
     "class_99",
 ]
-columns_14_short = ["6", "15", "16", "42", "52", "53", "62", "64", "65", "67", "88", "90", "92", "95"]
+columns_14_short = [
+    "6",
+    "15",
+    "16",
+    "42",
+    "52",
+    "53",
+    "62",
+    "64",
+    "65",
+    "67",
+    "88",
+    "90",
+    "92",
+    "95",
+]
 
 training_set_selected = pd.read_csv("../Features_PT/augmented_all_features_v6.csv")
 print("training set loaded")
@@ -74,35 +89,51 @@ training_set_car = pd.read_csv("../Features_New_Aug_Calc/augmented_car_features_
 print("training_set_car loaded")
 # assert len(training_set_car) == len(training_set_selected)
 
-training_set_fits = pd.read_csv("../Features_New_Aug_Calc/augmented_fits_features_v2.csv")
+training_set_fits = pd.read_csv(
+    "../Features_New_Aug_Calc/augmented_fits_features_v2.csv"
+)
 print("training_set_fits loaded")
 # assert len(training_set_fits) == len(training_set_selected)
 
-training_set_cesium = pd.read_csv("../Features_New_Aug_Calc/augmented_cesium_features_v2.csv")
+training_set_cesium = pd.read_csv(
+    "../Features_New_Aug_Calc/augmented_cesium_features_v2.csv"
+)
 print("augmented_cesium_features_v2 loaded")
 # assert len(training_set_cesium) == len(training_set_selected)
 
-training_set_tanya_mag = pd.read_csv("../Features_New_Aug_Calc/augmented2_det_mag_features.csv")
+training_set_tanya_mag = pd.read_csv(
+    "../Features_New_Aug_Calc/augmented2_det_mag_features.csv"
+)
 # assert len(training_set_tanya_mag) == len(training_set_selected)
 print("training_set_tanya_mag loaded")
 
-training_set_my_6 = pd.read_csv("../Features_New_Aug_Calc/augmented_my6_features_v2.csv")
+training_set_my_6 = pd.read_csv(
+    "../Features_New_Aug_Calc/augmented_my6_features_v2.csv"
+)
 # assert len(training_set_my_6) == len(training_set_selected)
 print("training set my6 loaded")
 
-training_set_gauss = pd.read_csv("../Features_New_Aug_Calc/augmented_gauss_features_v2.csv")
+training_set_gauss = pd.read_csv(
+    "../Features_New_Aug_Calc/augmented_gauss_features_v2.csv"
+)
 # assert len(training_set_gauss) == len(training_set_selected)
 print("training set gauss loaded")
 
-training_set_supernova1 = pd.read_csv("../Features_New_Aug_Calc/augmented_supernova1_features_v2.csv")
+training_set_supernova1 = pd.read_csv(
+    "../Features_New_Aug_Calc/augmented_supernova1_features_v2.csv"
+)
 # assert len(training_set_supernova1) == len(training_set_selected)
 print("training set supernova1 loaded")
 
-training_set_from_fits = pd.read_csv("../Features_New_Aug_Calc/aug_from_fit_features_v2.csv")
+training_set_from_fits = pd.read_csv(
+    "../Features_New_Aug_Calc/aug_from_fit_features_v2.csv"
+)
 # assert len(training_set_from_fits) == len(training_set_selected)
 print("training_set_from_fits loaded")
 
-training_set_colors = pd.read_csv("../Features_colors/augmented_color_features_v2_clipped.csv")
+training_set_colors = pd.read_csv(
+    "../Features_colors/augmented_color_features_v2_clipped.csv"
+)
 # assert len(training_set_colors) == len(training_set_selected)
 print("augmented_color_features_v2_clipped loaded")
 
@@ -110,7 +141,9 @@ training_set_periods = pd.read_csv("../Features_New_Aug_Calc/augemented_periods_
 # assert len(training_set_periods) == len(training_set_selected)
 print("augemented_periods_v2 loaded")
 
-training_set_double_peak = pd.read_csv("../Features_multi_tau/aug_exp_ratio_double_peak.csv")
+training_set_double_peak = pd.read_csv(
+    "../Features_multi_tau/aug_exp_ratio_double_peak.csv"
+)
 assert len(training_set_double_peak) == len(training_set_selected)
 print("training_set_double_peak loaded")
 """
@@ -237,29 +270,47 @@ print("training_set_selected", list(training_set_selected.columns))
 
 full_train = training_set_selected
 assert "target" in set(full_train.columns)
-full_train = pd.merge(left=full_train, right=training_set_tanya_mag, on="object_id", how="inner")
+full_train = pd.merge(
+    left=full_train, right=training_set_tanya_mag, on="object_id", how="inner"
+)
 assert "target" in set(full_train.columns)
-full_train = pd.merge(left=full_train, right=training_set_my_6, on="object_id", how="inner")
+full_train = pd.merge(
+    left=full_train, right=training_set_my_6, on="object_id", how="inner"
+)
 assert "target" in set(full_train.columns)
-full_train = pd.merge(left=full_train, right=training_set_gauss, on="object_id", how="inner")
+full_train = pd.merge(
+    left=full_train, right=training_set_gauss, on="object_id", how="inner"
+)
 assert "target" in set(full_train.columns)
-full_train = pd.merge(left=full_train, right=training_set_supernova1, on="object_id", how="inner")
+full_train = pd.merge(
+    left=full_train, right=training_set_supernova1, on="object_id", how="inner"
+)
 assert "target" in set(full_train.columns)
-full_train = pd.merge(left=full_train, right=training_set_from_fits, on="object_id", how="inner")
+full_train = pd.merge(
+    left=full_train, right=training_set_from_fits, on="object_id", how="inner"
+)
 assert "target" in set(full_train.columns)
-full_train = pd.merge(left=full_train, right=training_set_colors, on="object_id", how="inner")
+full_train = pd.merge(
+    left=full_train, right=training_set_colors, on="object_id", how="inner"
+)
 assert "target" in set(full_train.columns)
-full_train = pd.merge(left=full_train, right=training_set_periods, on="object_id", how="inner")
+full_train = pd.merge(
+    left=full_train, right=training_set_periods, on="object_id", how="inner"
+)
 assert "target" in set(full_train.columns)
 # full_train = pd.merge(left=full_train, right=training_set_metadata, on='object_id', how='inner')
-full_train = pd.merge(left=full_train, right=training_set_double_peak, on="object_id", how="inner")
+full_train = pd.merge(
+    left=full_train, right=training_set_double_peak, on="object_id", how="inner"
+)
 assert len(full_train) == len(training_set_selected)
 
 filter = (training_set_metadata["aug_fold"] == 0) | (training_set_metadata["ddf"] == 0)
 non_dff_objects = training_set_metadata.loc[filter, "object_id"].values
 print(len(non_dff_objects))
 print("before", len(full_train))
-full_train = full_train.loc[full_train["object_id"].isin(non_dff_objects), :].reset_index(drop=True)
+full_train = full_train.loc[
+    full_train["object_id"].isin(non_dff_objects), :
+].reset_index(drop=True)
 # print(full_train)
 print("after clean", len(full_train))
 
@@ -314,10 +365,18 @@ def augmented_split(train, cv_folds, seed=1111):
     for i in range(cv_folds.n_splits):
         train_idx, validation_idx = next(old_gen)
         train_idx = np.random.permutation(
-            aug_id_y[aug_id_y["real_object_id"].isin(obj_id_y.iloc[train_idx]["real_object_id"])].index.values
+            aug_id_y[
+                aug_id_y["real_object_id"].isin(
+                    obj_id_y.iloc[train_idx]["real_object_id"]
+                )
+            ].index.values
         )
         validation_idx = np.random.permutation(
-            aug_id_y[aug_id_y["real_object_id"].isin(obj_id_y.iloc[validation_idx]["real_object_id"])].index.values
+            aug_id_y[
+                aug_id_y["real_object_id"].isin(
+                    obj_id_y.iloc[validation_idx]["real_object_id"]
+                )
+            ].index.values
         )
         yield train_idx, validation_idx
 
@@ -329,12 +388,15 @@ for fold_, (trn_, val_) in enumerate(augmented_split(split_df, folds)):
     print(
         len(
             training_set_metadata[
-                (training_set_metadata["object_id"].isin(valid_objects)) & (training_set_metadata["ddf"] == 1)
+                (training_set_metadata["object_id"].isin(valid_objects))
+                & (training_set_metadata["ddf"] == 1)
             ]
         )
     )
 
-class_weights_array = np.array([1.0, 2.0, 1.0, 1.0, 1.0, 1.0, 1.0, 2.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0])
+class_weights_array = np.array(
+    [1.0, 2.0, 1.0, 1.0, 1.0, 1.0, 1.0, 2.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0]
+)
 
 
 def normalize_weigths(weights):
@@ -388,7 +450,22 @@ def lgbm_multi_weighted_logloss(y_true, y_preds):
     # https://www.kaggle.com/c/PLAsTiCC-2018/discussion/67194
     # with Kyle Boone's post https://www.kaggle.com/kyleboone
     classes = [6, 15, 16, 42, 52, 53, 62, 64, 65, 67, 88, 90, 92, 95]
-    class_weights = {6: 1, 15: 2, 16: 1, 42: 1, 52: 1, 53: 1, 62: 1, 64: 2, 65: 1, 67: 1, 88: 1, 90: 1, 92: 1, 95: 1}
+    class_weights = {
+        6: 1,
+        15: 2,
+        16: 1,
+        42: 1,
+        52: 1,
+        53: 1,
+        62: 1,
+        64: 2,
+        65: 1,
+        67: 1,
+        88: 1,
+        90: 1,
+        92: 1,
+        95: 1,
+    }
 
     loss = multi_weighted_logloss_chai(y_true, y_preds, classes, class_weights)
     return "wloss", loss, False
@@ -396,7 +473,22 @@ def lgbm_multi_weighted_logloss(y_true, y_preds):
 
 def multi_weighted_logloss(y_true, y_preds):
     classes = [6, 15, 16, 42, 52, 53, 62, 64, 65, 67, 88, 90, 92, 95]
-    class_weights = {6: 1, 15: 2, 16: 1, 42: 1, 52: 1, 53: 1, 62: 1, 64: 2, 65: 1, 67: 1, 88: 1, 90: 1, 92: 1, 95: 1}
+    class_weights = {
+        6: 1,
+        15: 2,
+        16: 1,
+        42: 1,
+        52: 1,
+        53: 1,
+        62: 1,
+        64: 2,
+        65: 1,
+        67: 1,
+        88: 1,
+        90: 1,
+        92: 1,
+        95: 1,
+    }
 
     loss = multi_weighted_logloss_chai(y_true, y_preds, classes, class_weights)
     return loss
@@ -425,7 +517,9 @@ def permutation_scorer(model, x_valid, y_valid):
 
 
 # http://scikit-learn.org/stable/modules/generated/sklearn.metrics.confusion_matrix.html
-def plot_confusion_matrix(cm, classes, normalize=False, title="Confusion matrix", cmap=plt.cm.Blues):
+def plot_confusion_matrix(
+    cm, classes, normalize=False, title="Confusion matrix", cmap=plt.cm.Blues
+):
     """
     This function prints and plots the confusion matrix.
     Normalization can be applied by setting `normalize=True`.
@@ -485,12 +579,25 @@ def look_importance(model, x_valid, y_valid):
             cur_score = permutation_scorer(model, x_shuffled, y_valid)
             feat_scores.append(cur_score)
         feat_scores = base_score - np.array(feat_scores)
-        print("feature ", feature_names[feat_index], "-->", np.mean(feat_scores), "+-", np.std(feat_scores))
+        print(
+            "feature ",
+            feature_names[feat_index],
+            "-->",
+            np.mean(feat_scores),
+            "+-",
+            np.std(feat_scores),
+        )
         result[feature_names[feat_index]] = feat_scores
     return pd.DataFrame(result)
 
 
-def do_train(full_train, train_columns, only_one_fold=False, show_confusion_matrix=False, save_importances=False):
+def do_train(
+    full_train,
+    train_columns,
+    only_one_fold=False,
+    show_confusion_matrix=False,
+    save_importances=False,
+):
     clfs = []
     oof_preds = np.zeros((len(full_train), n_classes))
 
@@ -628,7 +735,9 @@ def do_train(full_train, train_columns, only_one_fold=False, show_confusion_matr
 
 def dump_to_file(str):
     with open("log.txt", "a") as text_file:
-        text_file.write(str + "\n" + "--------------------------------------------------------\n")
+        text_file.write(
+            str + "\n" + "--------------------------------------------------------\n"
+        )
 
 
 """
@@ -648,7 +757,11 @@ best_columns = used_columns.copy()
 best_columns.remove("object_id")
 best_columns.remove("target")
 best_loss, clfs = do_train(
-    full_train, best_columns, only_one_fold=only_one_fold, show_confusion_matrix=True, save_importances=False
+    full_train,
+    best_columns,
+    only_one_fold=only_one_fold,
+    show_confusion_matrix=True,
+    save_importances=False,
 )
 str_to_dump = "initial loss: " + str(best_loss) + "\n"
 str_to_dump += best_columns.__repr__()
@@ -661,20 +774,59 @@ chunks = 100000
 
 for i_c, dfs in enumerate(
     zip(
-        pd.read_csv("../Features_PT/test_selected_features_v6.csv", iterator=True, chunksize=chunks),
-        pd.read_csv("../Features/test_set_cesium_full_features4.csv", iterator=True, chunksize=chunks),
-        pd.read_csv("../Features_3_Good_Submit/test_set_mag_features.csv", iterator=True, chunksize=chunks),
-        pd.read_csv("../Features/test_set_my6_features.csv", iterator=True, chunksize=chunks),
-        pd.read_csv("../Features/test_set_gauss_features.csv", iterator=True, chunksize=chunks),
-        pd.read_csv("../Features/test_set_supernova1_features.csv", iterator=True, chunksize=chunks),
-        pd.read_csv("../Tanya/calculated/test_from_fit_features.csv", iterator=True, chunksize=chunks),
-        pd.read_csv("../Features_colors/test_color_features_clipped.csv", iterator=True, chunksize=chunks),
-        pd.read_csv("../Features_Periods/test_periods.csv", iterator=True, chunksize=chunks),
-        pd.read_csv("../Features_multi_tau/test_set_exp_ratio_double_peak.csv", iterator=True, chunksize=chunks),
+        pd.read_csv(
+            "../Features_PT/test_selected_features_v6.csv",
+            iterator=True,
+            chunksize=chunks,
+        ),
+        pd.read_csv(
+            "../Features/test_set_cesium_full_features4.csv",
+            iterator=True,
+            chunksize=chunks,
+        ),
+        pd.read_csv(
+            "../Features_3_Good_Submit/test_set_mag_features.csv",
+            iterator=True,
+            chunksize=chunks,
+        ),
+        pd.read_csv(
+            "../Features/test_set_my6_features.csv", iterator=True, chunksize=chunks
+        ),
+        pd.read_csv(
+            "../Features/test_set_gauss_features.csv", iterator=True, chunksize=chunks
+        ),
+        pd.read_csv(
+            "../Features/test_set_supernova1_features.csv",
+            iterator=True,
+            chunksize=chunks,
+        ),
+        pd.read_csv(
+            "../Tanya/calculated/test_from_fit_features.csv",
+            iterator=True,
+            chunksize=chunks,
+        ),
+        pd.read_csv(
+            "../Features_colors/test_color_features_clipped.csv",
+            iterator=True,
+            chunksize=chunks,
+        ),
+        pd.read_csv(
+            "../Features_Periods/test_periods.csv", iterator=True, chunksize=chunks
+        ),
+        pd.read_csv(
+            "../Features_multi_tau/test_set_exp_ratio_double_peak.csv",
+            iterator=True,
+            chunksize=chunks,
+        ),
     )
 ):
     print("chunk", i_c)
-    full_test = reduce(lambda left, right: pd.merge(left, right, on="object_id", suffixes=("", "extra")), dfs)
+    full_test = reduce(
+        lambda left, right: pd.merge(
+            left, right, on="object_id", suffixes=("", "extra")
+        ),
+        dfs,
+    )
     # this verifies that object_id's are the same in all files
     assert len(full_test) == len(dfs[0])
     full_test[full_train_columns] = full_test[full_train_columns].fillna(train_mean)
@@ -683,7 +835,9 @@ for i_c, dfs in enumerate(
     start_pred = time.time()
     preds = None
     for clf in clfs:
-        test_pred = clf.predict_proba(full_test[full_train_columns], num_iteration=clf.best_iteration_)
+        test_pred = clf.predict_proba(
+            full_test[full_train_columns], num_iteration=clf.best_iteration_
+        )
         if preds is None:
             preds = test_pred / len(clfs)
         else:
@@ -694,7 +848,8 @@ for i_c, dfs in enumerate(
     mymedian = np.median(preds, axis=1)
     mymax = np.max(preds, axis=1)
     preds_99 = (
-        ((((mymedian) + (((mymean) / 2.0))) / 2.0)) + (((((1.0) - (((mymax) * (((mymax) * (mymax))))))) / 2.0))
+        ((((mymedian) + (((mymean) / 2.0))) / 2.0))
+        + (((((1.0) - (((mymax) * (((mymax) * (mymax))))))) / 2.0))
     ) / 2.0
 
     """
@@ -734,7 +889,9 @@ z = z.groupby("object_id").mean()
 z.to_csv("predictions_reo.csv", index=True)
 
 test_set_metadata = pd.read_csv("../Data/test_set_metadata.csv")
-galactic_objects = test_set_metadata.loc[test_set_metadata["hostgal_photoz"] == 0, "object_id"].values
+galactic_objects = test_set_metadata.loc[
+    test_set_metadata["hostgal_photoz"] == 0, "object_id"
+].values
 print(len(galactic_objects), "galactic objects")
 
 # make zero some columns
