@@ -8,9 +8,9 @@ If you are using the results and code of this work, please cite it as
 ```
 @article{Gabruseva_2019,
   title={Photometric light curves classification with machine learning},
-  author={T. Gabruseva and S. Zlobin and P. wang},
+  author={T. Gabruseva and S. Zlobin and P. Wang},
   journal={JAI},
-  year={2019}
+  year={2020}
 }
 ```
 
